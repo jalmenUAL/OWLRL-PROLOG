@@ -1,0 +1,464 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY socialnetwork "http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#"
+     xml:base="http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:socialnetwork="http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about=""/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#added_by -->
+
+    <owl:ObjectProperty rdf:about="#added_by">
+        <rdfs:subPropertyOf rdf:resource="#created_by"/>
+        <rdfs:domain rdf:resource="#event"/>
+        <rdfs:range rdf:resource="#user"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#attends -->
+
+    <owl:ObjectProperty rdf:about="#attends">
+        <rdfs:range rdf:resource="#event"/>
+        <rdfs:domain rdf:resource="#user"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#belongs_to -->
+
+    <owl:ObjectProperty rdf:about="#belongs_to">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="#user"/>
+        <rdfs:domain rdf:resource="#user_item"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#confirmed_by -->
+
+    <owl:ObjectProperty rdf:about="#confirmed_by">
+        <owl:inverseOf rdf:resource="#attends"/>
+        <rdfs:domain rdf:resource="#event"/>
+        <rdfs:range rdf:resource="#user"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#created_by -->
+
+    <owl:ObjectProperty rdf:about="#created_by">
+        <rdfs:domain rdf:resource="#activity"/>
+        <rdfs:range rdf:resource="#user"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#friend_of -->
+
+    <owl:ObjectProperty rdf:about="#friend_of">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <owl:propertyDisjointWith rdf:resource="#recommended_friend_of"/>
+        <rdfs:domain rdf:resource="#user"/>
+        <rdfs:range rdf:resource="#user"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#has_been_invited_to -->
+
+    <owl:ObjectProperty rdf:about="#has_been_invited_to">
+        <rdfs:range rdf:resource="#event"/>
+        <rdfs:domain rdf:resource="#user"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#i_like_it -->
+
+    <owl:ObjectProperty rdf:about="#i_like_it">
+        <rdfs:range rdf:resource="#activity"/>
+        <rdfs:domain rdf:resource="#user"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#liked_by -->
+
+    <owl:ObjectProperty rdf:about="#liked_by">
+        <owl:inverseOf rdf:resource="#i_like_it"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#recommended_friend_of -->
+
+    <owl:ObjectProperty rdf:about="#recommended_friend_of">
+        <rdfs:domain rdf:resource="#user"/>
+        <rdfs:range rdf:resource="#user"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="#friend_of"/>
+            <rdf:Description rdf:about="#friend_of"/>
+        </owl:propertyChainAxiom>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#replies_to -->
+
+    <owl:ObjectProperty rdf:about="#replies_to">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="#message"/>
+        <rdfs:domain rdf:resource="#message"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#send_by -->
+
+    <owl:ObjectProperty rdf:about="#send_by">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="#created_by"/>
+        <rdfs:domain rdf:resource="#message"/>
+        <rdfs:range rdf:resource="#user"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#written_in -->
+
+    <owl:ObjectProperty rdf:about="#written_in">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="#message"/>
+        <rdfs:range rdf:resource="#wall"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#content -->
+
+    <owl:DatatypeProperty rdf:about="#content">
+        <rdfs:domain rdf:resource="#message"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#date_of_event -->
+
+    <owl:DatatypeProperty rdf:about="#date_of_event">
+        <rdfs:domain rdf:resource="#event"/>
+        <rdfs:range rdf:resource="&xsd;date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#name -->
+
+    <owl:DatatypeProperty rdf:about="#name">
+        <rdfs:domain rdf:resource="#event"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#nick -->
+
+    <owl:DatatypeProperty rdf:about="#nick">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="#user"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#password -->
+
+    <owl:DatatypeProperty rdf:about="#password">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="#user"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#username -->
+
+    <owl:DatatypeProperty rdf:about="#username">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="#user"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#activity -->
+
+    <owl:Class rdf:about="#activity">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#created_by"/>
+                <owl:onClass rdf:resource="#user"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#album -->
+
+    <owl:Class rdf:about="#album">
+        <rdfs:subClassOf rdf:resource="#user_item"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#event -->
+
+    <owl:Class rdf:about="#event">
+        <rdfs:subClassOf rdf:resource="#activity"/>
+        <owl:disjointWith rdf:resource="#message"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#message -->
+
+    <owl:Class rdf:about="#message">
+        <rdfs:subClassOf rdf:resource="#activity"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#popular -->
+
+    <owl:Class rdf:about="#popular"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#somebody_attends -->
+
+    <owl:Class rdf:about="#somebody_attends">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#confirmed_by"/>
+                <owl:someValuesFrom rdf:resource="#user"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="#popular"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#somebody_likes -->
+
+    <owl:Class rdf:about="#somebody_likes">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#liked_by"/>
+                <owl:someValuesFrom rdf:resource="#user"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="#popular"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#user -->
+
+    <owl:Class rdf:about="#user"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#user_item -->
+
+    <owl:Class rdf:about="#user_item"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#wall -->
+
+    <owl:Class rdf:about="#wall">
+        <rdfs:subClassOf rdf:resource="#user_item"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#event1 -->
+
+    <event rdf:about="#event1">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <date_of_event rdf:datatype="&xsd;date">15/12/2013</date_of_event>
+        <name>Submission to Semantic Web Journal</name>
+        <added_by rdf:resource="#luis"/>
+    </event>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#event2 -->
+
+    <owl:Thing rdf:about="#event2">
+        <rdf:type rdf:resource="#event"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#jesus -->
+
+    <owl:Thing rdf:about="#jesus">
+        <rdf:type rdf:resource="#user"/>
+        <password>passjesus2011</password>
+        <nick>jalmen</nick>
+        <friend_of rdf:resource="#luis"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#luis -->
+
+    <owl:Thing rdf:about="#luis">
+        <rdf:type rdf:resource="#user"/>
+        <nick>iribarne</nick>
+        <password>iri0000</password>
+        <friend_of rdf:resource="#vicente"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#message1 -->
+
+    <owl:Thing rdf:about="#message1">
+        <rdf:type rdf:resource="#message"/>
+        <content
+            >I have sent the paper!</content>
+        <send_by rdf:resource="#jesus"/>
+         
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#message2 -->
+
+    <owl:Thing rdf:about="#message2">
+        <rdf:type rdf:resource="#message"/>
+        <content>good luck!</content>
+        <send_by rdf:resource="#luis"/>
+        <replies_to rdf:resource="#message1"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#vicente -->
+
+    <owl:Thing rdf:about="#vicente">
+        <rdf:type rdf:resource="#user"/>
+        <password>vicvicvic</password>
+        <nick>vicente</nick>
+        <attends rdf:resource="#event1"/>
+        <has_been_invited_to rdf:resource="#event1"/>
+        <friend_of rdf:resource="#luis"/>
+        <i_like_it rdf:resource="#message2"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#wall_jesus -->
+
+    <wall rdf:about="#wall_jesus">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <belongs_to rdf:resource="#jesus"/>
+    </wall>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#wall_luis -->
+
+    <owl:Thing rdf:about="#wall_luis">
+        <rdf:type rdf:resource="#wall"/>
+        <belongs_to rdf:resource="#luis"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/7/socialnetwork.owl#wall_vicente -->
+
+    <wall rdf:about="#wall_vicente">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <belongs_to rdf:resource="#vicente"/>
+    </wall>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->
+
